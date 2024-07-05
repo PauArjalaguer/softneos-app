@@ -1,0 +1,38 @@
+<ng-container *ngIf="isLoading==1">
+    <div class="flex justify-center">
+        <span class="relative flex h-16 w-16">
+          <span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75"
+          ></span>
+          <span
+            class="relative inline-flex h-16 w-16 rounded-full bg-lime-500"
+          ></span>
+        </span>
+      </div>
+ </ng-container>
+
+<ng-container *ngIf="isLoading==0 && !events.length"> <div
+        class="w-full bg-lime-500 font-bold p-4 text-white rounded-xl mt-5">No hi
+        ha cap data programada per a aquesta pel.lícula. </div></ng-container>
+
+<ng-container *ngIf="events.length;">
+    <h1 class="text-2xl">{{events[0].event_name}}</h1>
+    <div class="md:flex mt-5 flex-wrap items-center w-full flex-wrap">
+        <div *ngFor="let  eventItem of events"
+        class="text-center w-full md:w-1/2 lg:w-1/4  mb-10 p-2 ">
+            <div class="flex rounded-t-xl bg-lime-500 p-3 text-white">
+                <div
+                    class="w-1/2 justify-start text-left font-bold">{{eventItem.event_date
+                    |
+                    date:'dd/MM/Y'}}</div>
+                <div class="w-1/2 justify-end text-right font-bold">
+                    {{eventItem.event_time.substring(0,5)}}</div></div>
+            <img class="w-full shadow-xl aspect-[9/12]"
+                src="{{eventItem.event_image}}" />
+            <button
+                [routerLink]="['/comprar/'+eventItem.id+'/'+eventItem.id+'/'+eventItem.event_name]"
+                class="w-full bg-lime-500 rounded-b-xl p-4 font-bold text-white hover:bg-white hover:text-lime-500 shadow-xl ">
+                Comprar entrada {{eventItem.event_price}} &euro;</button>
+        </div>
+    </div>
+</ng-container>

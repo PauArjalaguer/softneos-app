@@ -1,0 +1,22 @@
+<nav class="flex  bg-lime-700">
+    <div class="w-1/2 p-5">
+        <a class="text-3xl text-white font-bold uppercase text-white" routerLink="/"><h1 class="text-white">Teatre <span>Olesa</span></h1></a>
+    </div>
+    <div class="w-1/2 flex justify-end items-center p-5">
+        <ul>
+            <li class="inline mx-3 text-white font-bold">
+                <a routerLinkActive="active" routerLink="/inici">Inici</a>
+            </li>
+            <li class="inline mx-3 text-white font-bold {{username ? 'hidden':''}}">
+                <a routerLinkActive="active" routerLink="/login" >Login</a>
+            </li>
+            <!-- <li class="inline mx-3 text-white font-bold {{username ? '':'hidden'}}">
+                <a routerLinkActive="active" routerLink="/dashboard" >{{username}} </a>
+            </li>
+            <li class="inline mx-3 text-white font-bold {{username ? '':'hidden'}} cursor-pointer">
+                <a (click)="logout()">Logout</a>
+            </li> -->
+           
+        </ul>
+    </div>
+</nav>
