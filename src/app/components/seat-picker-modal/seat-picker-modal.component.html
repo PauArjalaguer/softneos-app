@@ -1,0 +1,23 @@
+<ng-container *ngIf="seats && seats.length && !message">
+    <h2 class="swal2-title">Escull el teu seient</h2>
+</ng-container>
+<ng-container *ngIf="error">
+    <div class="w-full bg-red-500 font-bold p-4 text-white rounded-xl mb-5">El seient no ha pogut ser assignat.</div>
+</ng-container>
+<ng-container *ngIf="message && !error">
+    <div class="w-full bg-lime-500 font-bold p-4 text-white rounded-xl ">{{message}}</div>
+</ng-container>
+
+<div *ngFor="let seat of seats" class="text-center p-1 md:p-1 w-[10%]" style="float:left;">
+    <div id="seat_{{seat.id}}" class="rounded-t-xl p-1 text-white"
+        style="background-color: {{seat.status_color ? seat.status_color : 'burlywood'}}">
+        <!-- {{seat.id}} C{{seat.c}} F{{seat.r}} -->
+        <button class="p-2  {{seat.status_color && seat.status_color!='yellow' ? 'hidden' : ''}}"
+            (click)="changeSeatStatus(event_id,seat.id)">&nbsp;</button>
+        <button
+            class="cursor-not-allowed p-2  {{seat.status_color && seat.status_color!='yellow' ? '' : 'hidden'}}">&nbsp;</button>
+    </div>
+</div>
+<ng-container *ngIf="seats && seats.length">
+    <h1 class="text-2xl text-lime-600 mt-5">Comprar</h1>
+</ng-container>
