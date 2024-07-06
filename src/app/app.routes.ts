@@ -3,7 +3,11 @@ import { EventListComponent } from './components/event-list/event-list.component
 
 export const routes: Routes = [
     { path: '', redirectTo: 'inici', pathMatch: 'full' },
-   { path: 'inici', component: EventListComponent },
+   // { path: 'inici/:id/:rand', component: EventListComponent },
+   { path: 'inici/:id', component: EventListComponent },
+    { path: 'inici', component: EventListComponent },
+    { path: 'inicia/', component: EventListComponent },
+    
     /*
         { path: 'pagar/:show_id/:event_id/:showName', component: PaymentComponent },
         { path: 'resum/:show_id/:event_id/:showName', component: OrderSummaryComponent },

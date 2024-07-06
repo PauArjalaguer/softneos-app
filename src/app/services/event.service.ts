@@ -15,13 +15,10 @@ export class EventService {
     return this.http.get<Event[]>(`${this.API_URL}/events/`)
   }
 
-  /* getEventsByShow_id(show_id:number): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.API_URL}/events/getEventsByShow_id/${show_id}`)
+  updateEventSeatStatus(event_id: number, seat_id: number, $uuid: any, status_id: number): Observable<Event[]> {
+    let data = { 'event_id': event_id, 'seat_id': seat_id, 'session_id': $uuid, 'status_id': status_id };
+    return this.http.post<Event[]>(`${this.API_URL}/EventSeat/updateEventSeatStatus/`, data)
   }
   
-  getEvent(show_id:number, event_id:number): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}/events/getEvent/${show_id}/${event_id}`)
-  } */
-
 
 }
