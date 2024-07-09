@@ -1,0 +1,20 @@
+<div class="w-full flex justify-center ">
+<form class="w-2/3 flex flex-col justify-center" [formGroup]="loginForm" (ngSubmit)="login()">
+    <input type="email" formControlName="usermail" class="form-control {{ hasError('username') ? 'is-invalid' : ''}}"
+        placeholder="Introdueix el teu usermail" class="p-4 border rounded-[999px] block m-2" />
+    <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('usermail')">
+        <span *ngSwitchCase="'required'">* Camp obligatori</span>
+        <span *ngSwitchCase="'email'">* Ha de ser un email</span>
+    </div>
+    <input type="password" id="password" formControlName="userpassword"
+        class="form-control {{ hasError('userpassword') ? 'is-invalid' : ''}}" placeholder="Introdueix el teu password"
+        class="p-4 border rounded-[999px] block m-2" />
+    <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('userpassword')">
+        <span *ngSwitchCase="'required'">* Camp obligatori</span>
+
+    </div>
+
+    <button class="bg-lime-600 rounded-xl m-2 p-4 font-bold text-white shadow-xl"
+        [disabled]="loginForm.invalid">Enviar</button>
+</form>
+</div>

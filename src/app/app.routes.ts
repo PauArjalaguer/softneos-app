@@ -1,24 +1,14 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { RestartComponent } from './components/restart/restart.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'inici', pathMatch: 'full' },
-   // { path: 'inici/:id/:rand', component: EventListComponent },
-   { path: 'inici/:id', component: EventListComponent },
-    { path: 'inici', component: EventListComponent },
-    { path: 'inicia/', component: EventListComponent },
-    
-    /*
-        { path: 'pagar/:show_id/:event_id/:showName', component: PaymentComponent },
-        { path: 'resum/:show_id/:event_id/:showName', component: OrderSummaryComponent },
-        { path: 'comprar/:show_id/:event_id/:showName', component: SeatsListComponent },
-        { path: 'espectacle/:id/:showName', component: EventsListComponent },
-        { path: 'inici', component: ShowsListComponent },
-        { path: 'login', component: LoginComponent },
-    
-        { path: 'dashboard/event/:event_id', component: DashboardEventEditComponent },
-        { path: 'dashboard', component: DashboardComponent }, */
-
-
+    // { path: '', redirectTo: 'inici', pathMatch: 'full' },   
+    { path: '', component: EventListComponent },
+    { path: 'resum/:id', component: OrderSummaryComponent },
+    { path: 'restart', component: RestartComponent },
+    { path: 'login', component: LoginComponent }
 
 ];

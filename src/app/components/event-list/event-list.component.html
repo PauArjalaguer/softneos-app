@@ -17,26 +17,6 @@
 </ng-container>
 
 <ng-container *ngIf="events.length;">
-<<<<<<< HEAD
-    <h1 class="text-2xl hidden">{{events[0].event_name}}</h1>
-    <div class="md:flex mt-5 flex-wrap items-center w-full flex-wrap">
-        <div *ngFor="let  eventItem of events"
-        class="text-center w-full md:w-1/2 lg:w-1/4  mb-10 p-2 ">
-            <div class="flex rounded-t-xl bg-lime-500 p-3 text-white">
-                <div
-                    class="w-1/2 justify-start text-left font-bold">{{eventItem.event_date
-                    |
-                    date:'dd/MM/Y'}}</div>
-                <div class="w-1/2 justify-end text-right font-bold">
-                    {{eventItem.event_time.substring(0,5)}}</div></div>
-            <img class="w-full shadow-xl aspect-[9/12]"
-                src="{{eventItem.event_image}}" />
-            <button
-                [routerLink]="['/comprar/'+eventItem.id+'/'+eventItem.id+'/'+eventItem.event_name]"
-                class="w-full bg-lime-500 rounded-b-xl p-4 font-bold text-white hover:bg-white hover:text-lime-500 shadow-xl ">
-                Comprar entrada {{eventItem.event_price}} &euro;</button>
-        </div>
-=======
   <div class="md:flex mt-5 flex-wrap items-center w-full flex-wrap">
     <div *ngFor="let  eventItem of events" class="text-center w-full md:w-1/2 lg:w-1/4  mb-10 p-2 ">
       <div class="flex rounded-t-xl bg-lime-500 p-3 text-white">
@@ -53,7 +33,6 @@
       <button (click)="seatPicker(eventItem.id,0)"
         class="w-full bg-lime-500 rounded-b-xl p-4 font-bold text-white hover:bg-white hover:text-lime-500 shadow-xl ">
         Comprar entrada {{eventItem.event_price}} &euro;</button>
->>>>>>> ModalSeients
     </div>
   </div>
 </ng-container>

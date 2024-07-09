@@ -1,0 +1,69 @@
+<h1 class="text-2xl my-5">Resum de la comanda </h1>
+<ng-container *ngIf="isLoading==1">
+    <div class="flex justify-center">
+        <span class="relative flex h-16 w-16">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75"></span>
+            <span class="relative inline-flex h-16 w-16 rounded-full bg-lime-500"></span>
+        </span>
+    </div>
+</ng-container>
+<ng-container *ngIf="isLoading==0">
+    <div class="flex">
+        <div class="w-2/3 pr-2 border-r ">
+            <table class="w-full">
+                <tbody>
+                    <tr>
+                        <td class="border border-slate-700 border-r-0 p-4 w-1/2 bg-lime-500 text-white font-bold">
+                            {{event.event_name}}
+                        </td>
+                        <td
+                            class="border border-slate-700 border-l-0 p-4 w-1/2  bg-lime-500 text-white font-bold text-right">
+                            {{event.event_date
+                            | date:'dd/MM/Y'}} {{event.event_time.substring(0,5)}}</td>
+                    </tr>
+                    <tr *ngFor="let seat of order">
+                        <td class="border border-slate-700 p-4 w-1/2">Fila
+                            {{seat.seat_row}} -
+                            {{seat.seat_col}}
+                        </td>
+                        <td class="border border-slate-700 p-4 text-right w-1/2">{{seat.event_price}}
+                            €</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="border border-slate-700 p-4 text-right">Total</td>
+                        <td class="border border-slate-700 p-4 font-bold text-right">{{total}}
+                            €</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex justify-center">
+                <button (click)="seatPicker(event.event_id,0)"
+                    class="bg-lime-600 rounded-xl p-4 font-bold text-white shadow-xl mt-5 ">
+                    Modificar comanda </button>
+            </div>
+        </div>
+        <div class="w-1/3 flex   justify-center ">
+            <form class="w-2/3 flex flex-col justify-center" [formGroup]="orderForm" (ngSubmit)="saveOrder()">
+                <input  [(ngModel)]="username"  type="text" formControlName="username"
+                    class="form-control {{ hasError('username') ? 'is-invalid' : ''}}"
+                    placeholder="Introdueix el teu nom" class="p-4 border rounded-[999px] block m-2" />
+                <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('username')">
+                    <span *ngSwitchCase="'required'">* Camp obligatori</span>
+                </div>
+                <input [(ngModel)]="usermail" type="email" id="usermail" formControlName="usermail"
+                    class="form-control {{ hasError('usermail') ? 'is-invalid' : ''}}"
+                    placeholder="Introdueix el teu mail" class="p-4 border rounded-[999px] block m-2" />
+                <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('usermail')">
+                    <span *ngSwitchCase="'required'">* Camp obligatori</span>
+                    <span *ngSwitchCase="'email'">* Ha de ser un email</span>
+                </div>
+                <input type="hidden" id="session_id" formControlName="session_id"
+                    class="form-control {{ hasError('session_id') ? 'is-invalid' : ''}}"
+                    class="p-4 border rounded-[999px] block m-2" value="{{UUID}}" />
+                <button class="bg-lime-600 rounded-xl m-2 p-4 font-bold text-white shadow-xl"
+                    [disabled]="orderForm.invalid">Enviar</button>
+            </form>
+        </div>
+    </div>
+</ng-container>
+<ng-template #seatPickerContainer></ng-template>

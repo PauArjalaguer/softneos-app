@@ -1,23 +1,35 @@
-<ng-container *ngIf="seats && seats.length && !message">
-    <h2 class="swal2-title">Escull el teu seient</h2>
+<ng-container *ngIf="message && !error">
+    <div class="flex justify-center">
+        <span class="relative flex h-16 w-16">
+            <span
+                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75 mb-5"></span>
+            <span class="relative inline-flex h-16 w-16 rounded-full bg-lime-500"></span>
+        </span>
+    </div>
+</ng-container>
+<ng-container *ngIf="seats && seats.length && !message && !error">
+    <h2 class="swal2-title text-base md:text-2xl">Escull el teu seient</h2>
 </ng-container>
 <ng-container *ngIf="error">
     <div class="w-full bg-red-500 font-bold p-4 text-white rounded-xl mb-5">El seient no ha pogut ser assignat.</div>
 </ng-container>
 <ng-container *ngIf="message && !error">
-    <div class="w-full bg-lime-500 font-bold p-4 text-white rounded-xl ">{{message}}</div>
+    <div class="w-full bg-lime-500 font-bold p-4 text-white rounded-xl hidden  mb-5 ">{{message}}</div>
 </ng-container>
 
-<div *ngFor="let seat of seats" class="text-center p-1 md:p-1 w-[10%]" style="float:left;">
-    <div id="seat_{{seat.id}}" class="rounded-t-xl p-1 text-white"
+<div *ngFor="let seat of seats" class="text-center p-1 md:p-1 w-[10%] hover:bg-neutral-200" style="float:left;">
+    <div id="seat_{{seat.id}}" class="rounded-t-xl p-1 text-white "
         style="background-color: {{seat.status_color ? seat.status_color : 'burlywood'}}">
-        <!-- {{seat.id}} C{{seat.c}} F{{seat.r}} -->
-        <button class="p-2  {{seat.status_color && seat.status_color!='yellow' ? 'hidden' : ''}}"
+        <button id="seatButton_{{seat.id}}"
+            class="w-full p-2 {{seat.status_color && seat.status_name!='Assignada' ? 'hidden' : ''}}"
             (click)="changeSeatStatus(event_id,seat.id)">&nbsp;</button>
         <button
-            class="cursor-not-allowed p-2  {{seat.status_color && seat.status_color!='yellow' ? '' : 'hidden'}}">&nbsp;</button>
+            class="w-full cursor-not-allowed p-2 {{seat.status_color && seat.status_name!='Assignada' ? '' : 'hidden'}}">&nbsp;</button>
     </div>
 </div>
 <ng-container *ngIf="seats && seats.length">
-    <h1 class="text-2xl text-lime-600 mt-5">Comprar</h1>
+    <button class="bg-lime-600 rounded-xl p-4 font-bold text-white shadow-xl mt-5"
+       (click)="save(event_id)">
+        Pagar entrades </button>
+        
 </ng-container>
