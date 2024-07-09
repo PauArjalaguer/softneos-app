@@ -1,0 +1,71 @@
+<ng-container *ngIf="message.error">
+    <div class="w-full bg-red-500 font-bold p-4 text-white rounded-xl mb-5">{{message.error}}</div>
+</ng-container>
+<div class="w-full">
+    <div *ngFor="let seat of seats" class="text-center p-1 md:p-1 w-[10%] " style="float:left;">
+        <div class="flex justify-center {{seat.seat_row==1 ? 'cursor-pointer p-2 text-slate-600':'text-white'}}"
+            (click)="changeMultipleSeatsStatus('seat_col',seat.seat_col)">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        </div>
+        <div class="flex justify-center">
+            <div class="pr-2 pt-2 {{seat.seat_col==1 ? 'cursor-pointer p-2 text-slate-600':'text-white'}}"
+                (click)="changeMultipleSeatsStatus('seat_row',seat.seat_row)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+
+            <div id="seat_{{seat.id}}" class="rounded-t-xl p-1 border "
+                style="background-color: {{seat.status_color ? seat.status_color : 'burlywood'}}; color: {{seat.status_color ? seat.status_color : 'burlywood'}}">
+                {{seat.id}} C{{seat.seat_col}} F{{seat.seat_row}}
+                <button (click)="changeSeatStatus(event_id,seat.id)"
+                    class=" w-full  {{seat.status_color  && seat.status_color!='#424242' && (seat.status_color=='#ffffff' || seat.status_color=='#009900') ? 'hidden ' : ''}}">
+                    {{seat.id}} C{{seat.seat_col}} F{{seat.seat_row}}</button>
+                <button
+                    class="w-full  cursor-not-allowed  {{seat.status_color && (seat.status_color=='#ffffff' || seat.status_color=='#009900') ? '' : 'hidden'}}">
+                    {{seat.id}} C{{seat.seat_col}} F{{seat.seat_row}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="w-1/2 clear-both ">
+    <form class=" flex flex-col justify-center" [formGroup]="eventForm" (ngSubmit)="updateEventInfo()">
+        <input type="text" formControlName="event_name"
+            class="form-control {{ hasError('event_name') ? 'is-invalid' : ''}}"
+            placeholder="Introdueix el nom de l' esdeveniment." class="p-4 border rounded-[999px] block m-2" />
+        <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('event_name')">
+            <span *ngSwitchCase="'required'">* Camp obligatori</span>
+        </div>
+        <input type="text" formControlName="event_image"
+            class="form-control {{ hasError('event_image') ? 'is-invalid' : ''}}"
+            placeholder="Introdueix la url de la imatge" class="p-4 border rounded-[999px] block m-2" />
+        <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('event_image')">
+            <span *ngSwitchCase="'required'">* Camp obligatori</span>
+        </div>
+
+        <input type="date" formControlName="event_date"
+            class="form-control {{ hasError('event_date') ? 'is-invalid' : ''}}"
+            placeholder="Introdueix la url de la imatge" class="p-4 border rounded-[999px] block m-2" />
+        <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('event_date')">
+            <span *ngSwitchCase="'required'">* Camp obligatori</span>
+        </div>
+        <input type="hidden" id="event_id" formControlName="event_id"
+            class="form-control {{ hasError('event_id') ? 'is-invalid' : ''}}"
+            class="p-4 border rounded-[999px] block m-2" value="{{event_id}}" />
+        <input type="time" formControlName="event_time"
+            class="form-control {{ hasError('event_time') ? 'is-invalid' : ''}}"
+            placeholder="Introdueix la url de la imatge" class="p-4 border rounded-[999px] block m-2" />
+        <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('event_time')">
+            <span *ngSwitchCase="'required'">* Camp obligatori</span>
+        </div>
+
+        <button class="bg-lime-600 rounded-xl m-2 p-4 font-bold text-white shadow-xl"
+            [disabled]="eventForm.invalid">Enviar</button>
+    </form>
+</div>

@@ -11,8 +11,8 @@ import { GlobalFunctionsService } from '../../services/global-functions.service'
   templateUrl: './seat-picker-modal.component.html',
   styleUrl: './seat-picker-modal.component.css'
 })
-export class SeatPickerModalComponent {
-  seats: any;
+export class SeatPickerModalComponent {  
+  seats: any; //crear model de seient quan es pugui
   event_id?: any;
   uuid: any;
   error?: any;

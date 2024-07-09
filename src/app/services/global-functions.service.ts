@@ -28,6 +28,7 @@ export class GlobalFunctionsService {
   }
 
   seatPicker(id: any, seatPickerContainer: any) {
+    this.uuid = sessionStorage.getItem('uuid');
     if (this.timeOut !== null) {
            clearTimeout(this.timeOut);
     }

@@ -35,7 +35,6 @@ export class OrderSummaryComponent {
     usermail: new FormControl('', [Validators.required, Validators.email]),
     username: new FormControl('', Validators.required),
     session_id: new FormControl(this.UUID, Validators.required),
-
   })
   
 
@@ -49,7 +48,7 @@ export class OrderSummaryComponent {
     this.eventService.getEvent(this.event_id).subscribe(event => {
       this.event = event;
     });
-    this.eventService.getEventSeatSummaryBySession_id(this.UUID).subscribe(order => {
+    this.eventService.getEventSeatSummaryBySession_id(this.event_id,this.UUID,0).subscribe(order => {
       this.order = order;
       this.isLoading = 0;
       this.isLoading = 0;

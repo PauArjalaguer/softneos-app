@@ -11,7 +11,10 @@ import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 export class AppComponent {
   sessionUUid: string = "";
   ngOnInit() {
-  
+    if (!sessionStorage.getItem('uuid')) {
+      const uuid = unescape(encodeURIComponent(Date.now()));
+      sessionStorage.setItem('uuid', uuid);
+    }
   }
   title = 'Teatre Olesa';
 }

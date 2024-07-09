@@ -11,6 +11,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RestartComponent {
   constructor(private router: Router, private route: ActivatedRoute) { }
   ngOnInit(): void {
+    if (!sessionStorage.getItem('uuid')) {
+      const uuid = unescape(encodeURIComponent(Date.now()));
+      sessionStorage.setItem('uuid', uuid);
+    }
     this.refreshCurrentRoute();
     this.navigateToNewRoute();
   }
