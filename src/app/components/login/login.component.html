@@ -1,15 +1,15 @@
 <div class="w-full flex justify-center ">
 <form class="w-2/3 flex flex-col justify-center" [formGroup]="loginForm" (ngSubmit)="login()">
-    <input type="email" formControlName="usermail" class="form-control {{ hasError('username') ? 'is-invalid' : ''}}"
-        placeholder="Introdueix el teu usermail" class="p-4 border rounded-[999px] block m-2" />
-    <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('usermail')">
+    <input type="email" formControlName="usermail" class="form-control {{ hasError('usermail') ? 'border-red-700' : ''}}"
+        placeholder="Introdueix el teu usermail" class="p-4 border block m-2" /> 
+    <div class="invalid-feedback px-4 text-xs text-slate-400 {{ hasError('usermail') ? '' : 'hidden'}}" [ngSwitch]="getCurrentError('usermail')">
         <span *ngSwitchCase="'required'">* Camp obligatori</span>
         <span *ngSwitchCase="'email'">* Ha de ser un email</span>
     </div>
     <input type="password" id="password" formControlName="userpassword"
-        class="form-control {{ hasError('userpassword') ? 'is-invalid' : ''}}" placeholder="Introdueix el teu password"
-        class="p-4 border rounded-[999px] block m-2" />
-    <div class="invalid-feedback px-4 text-xs text-slate-400" [ngSwitch]="getCurrentError('userpassword')">
+        class="form-control {{ hasError('userpassword') ? 'border-red-700' : ''}}" placeholder="Introdueix el teu password"
+        class="p-4 border  block m-2" />
+    <div class="invalid-feedback px-4 text-xs text-slate-400 {{ hasError('userpassword') ? '' : 'hidden'}}" [ngSwitch]="getCurrentError('userpassword')">
         <span *ngSwitchCase="'required'">* Camp obligatori</span>
 
     </div>

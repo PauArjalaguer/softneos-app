@@ -20,10 +20,12 @@ export class RestartComponent {
   }
 
   refreshCurrentRoute() {
-    this.router.navigate([this.route.snapshot.url], { replaceUrl: true });
+  this.router.navigate([this.route.snapshot.url], { replaceUrl: true });
+   
   }
 
   navigateToNewRoute() {
     this.router.navigate(['']);
+    
   }
 }

@@ -14,8 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class DashboardEventEditComponent {
   //  seats: Seat[] = [];
-  seats: any; //crear model de seient quan es pugui
-  //lockedSeats: Seat[] = []; 
+  seats: any; //crear model de seient quan es pugui 
   lockedSeats: any;
   events?: any;
   isLoading: number;
@@ -27,15 +26,17 @@ export class DashboardEventEditComponent {
   constructor(private eventService: EventService, private router: Router, private route: ActivatedRoute,) {
     this.role_id = sessionStorage.getItem('role_id');
     this.isLoading = 1;
-
   }
   eventForm: FormGroup = new FormGroup({
     event_name: new FormControl('', [Validators.required]),
     event_image: new FormControl('', Validators.required),
     event_date: new FormControl('', Validators.required),
     event_time: new FormControl('', Validators.required),
+    event_price: new FormControl('', Validators.required),
     event_id: new FormControl('')
   })
+
+
   ngOnInit(): void {
     if (sessionStorage.getItem('role_id') != "1") {
       this.router.navigate(['restart']);
@@ -43,25 +44,28 @@ export class DashboardEventEditComponent {
     this.loadDataIntoTable();
     setInterval(() => {
       this.loadDataIntoTable()
-    }, 30000);
+    }, 15000);
   }
+
   private loadDataIntoTable(): void {
     this.isLoading = 1;
     this.UUID = sessionStorage.getItem('uuid');
+    //distribució i estat dels seients
     this.eventService.getEventSeatsStatusByEventId(this.event_id, this.UUID, this.role_id).subscribe(seat => {
       this.seats = seat;
-      //this.lockedSeats = seat.filter(item => item.status_name == 'locked');
       this.isLoading = 0;
     });
-    this.eventService.getEvent(this.event_id).subscribe(event => {
 
+    //info de l'esdeveniment
+    this.eventService.getEvent(this.event_id).subscribe(event => {
       this.events = event[0];
       this.eventForm.patchValue({
-        event_id:this.event_id,
+        event_id: this.event_id,
         event_name: event.event_name,
         event_image: event.event_image,
         event_date: event.event_date,
-        event_time: event.event_time
+        event_time: event.event_time,
+        event_price: event.event_price
 
       });
       this.isLoading = 0;
@@ -101,7 +105,12 @@ export class DashboardEventEditComponent {
   }
   updateEventInfo() {
     this.eventService.updateEventInfo(this.eventForm.value).subscribe(event => {
-      Swal.fire(event);
-     });
+      Swal.fire({
+        title: event.message,
+        icon: "success", willClose: () => {
+          this.router.navigate(['dashboard'])
+        }
+      });
+    });
   }
 }

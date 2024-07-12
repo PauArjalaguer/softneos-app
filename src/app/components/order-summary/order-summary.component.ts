@@ -26,6 +26,8 @@ export class OrderSummaryComponent {
   usermail: any;
   username:any;
   event_id: number;
+  isButtonDisabled: boolean = false;
+
   constructor(private orderService: OrderService, private router: Router, private route: ActivatedRoute, private eventService: EventService, public funcs: GlobalFunctionsService) {
     this.event_id = Number(this.route.snapshot.paramMap.get('id'));
     this.usermail = sessionStorage.getItem('usermail');
@@ -42,8 +44,7 @@ export class OrderSummaryComponent {
     Swal.close();
     this.getEventSeatSummaryBySession_id();
   }
-  private getEventSeatSummaryBySession_id(): void {
-  
+  private getEventSeatSummaryBySession_id(): void {  
     this.isLoading = 1;
     this.eventService.getEvent(this.event_id).subscribe(event => {
       this.event = event;
@@ -81,6 +82,10 @@ export class OrderSummaryComponent {
     return errors[0];
   }
   saveOrder() {
+    Swal.fire({
+      title: "Processant la comanda",
+      html: "Espera uns segons",
+    });
     this.orderService.createOrder(this.orderForm.value).subscribe(
       order => {
         Swal.fire({
@@ -88,7 +93,7 @@ export class OrderSummaryComponent {
           html: "Revisa la teva bústia de correu",
 
           willClose: () => {
-            sessionStorage.clear();
+            sessionStorage.setItem('uuid','');
             this.router.navigate(['restart']);
           }
         })

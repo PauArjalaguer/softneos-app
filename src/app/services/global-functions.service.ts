@@ -24,7 +24,6 @@ export class GlobalFunctionsService {
     this.uuid = sessionStorage.getItem('uuid');
     this.apiUrl = `http://127.0.0.1:8000/api/EventSeat/getEventSeatsStatusByEventId/`;
     this.animationEnabled = false;
-
   }
 
   seatPicker(id: any, seatPickerContainer: any) {
@@ -32,7 +31,7 @@ export class GlobalFunctionsService {
     if (this.timeOut !== null) {
            clearTimeout(this.timeOut);
     }
-    this.timeOut = setTimeout(() => this.seatPicker(id, seatPickerContainer), 10000);
+    this.timeOut = setTimeout(() => this.seatPicker(id, seatPickerContainer), 3000);
     let factory = this.resolver.resolveComponentFactory(SeatPickerModalComponent);
   
     const componenteRef = seatPickerContainer.createComponent(factory);

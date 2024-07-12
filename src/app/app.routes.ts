@@ -7,11 +7,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardEventEditComponent } from './components/dashboard-event-edit/dashboard-event-edit.component';
 
 export const routes: Routes = [   
-    { path: '', component: EventListComponent },
-    { path: 'resum/:id', component: OrderSummaryComponent },    
-    { path: 'login', component: LoginComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'dashboard/event/:event_id', component: DashboardEventEditComponent },
+    {path: '', component: EventListComponent },
+    {path: 'resum/:id', component: OrderSummaryComponent },    
+    {path: 'login', component: LoginComponent },
+    {path: 'dashboard', component: DashboardComponent },
+    {path: 'dashboard/event/:event_id', component: DashboardEventEditComponent },
     {path: 'restart',component:RestartComponent}
 
 
