@@ -22,7 +22,6 @@ export class EventService {
     return this.http.post<Event[]>(`${this.API_URL}/EventSeat/updateEventSeatStatus/`, data)
   }
 
- // getEventSeatsStatusByEventId
  getEventSeatsStatusByEventId( event_id:number, session_id: string, role_id:number): Observable<Order[]> {
   return this.http.get<Order[]>(`${this.API_URL}/EventSeat/getEventSeatsStatusByEventId/${event_id}/${session_id}/${role_id}`)
 }
